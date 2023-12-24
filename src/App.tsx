@@ -7,8 +7,11 @@ import { Header } from "./Components/Header";
 import { Input } from "./Components/Input";
 import { Button } from "./Components/Button";
 import { ListHeader } from "./Components/TaskList/ListHeader";
+import { Empty } from "./Components/TaskList/Empty";
 
 export function App() {
+  const teste = true;
+
   return (
     <main>
       <Header />
@@ -25,6 +28,8 @@ export function App() {
 
         <div className={styles.tasksList}>
           <ListHeader />
+
+          {teste ? <Empty></Empty> : <h1>Contém itens</h1>}
         </div>
       </section>
     </main>
