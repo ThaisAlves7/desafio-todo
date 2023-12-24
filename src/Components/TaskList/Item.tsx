@@ -4,17 +4,24 @@ import styles from './Item.module.css'
 import { ITasks } from '../../App'
 
 interface TaskStatus {
-  id: number
+  id: string
   value: boolean
 }
 
 interface TasksProps {
   data: ITasks
-  onRemoveTask: (id: number) => void
+  onRemoveTask: (id: string) => void
   toggleTaskStatus?: ({ id, value }: TaskStatus) => void
 }
 
 export function Item({ data, onRemoveTask, toggleTaskStatus }: TasksProps) {
+  const checkBoxCheckedClassName = data.isChecked
+    ? styles['checkbox-checked']
+    : styles['checkbox-unchecked']
+  const paragraphCheckedClassName = data.isChecked
+    ? styles['paragraph-checked']
+    : ''
+
   const handleDeleteTask = () => {
     onRemoveTask(data.id)
   }
@@ -24,11 +31,11 @@ export function Item({ data, onRemoveTask, toggleTaskStatus }: TasksProps) {
       <div>
         <label htmlFor="checkbox">
           <input readOnly type="checkbox" checked={data.isChecked} />
-          <span className={`${styles.checkbox} ${styles.checked}`}>
+          <span className={`${styles.checkbox} ${checkBoxCheckedClassName}`}>
             <Check size={12} />
           </span>
 
-          <p className={`${styles.paragraph} ${styles['paragraph-checked']}`}>
+          <p className={`${styles.paragraph} ${paragraphCheckedClassName}`}>
             {data.task}
           </p>
         </label>
