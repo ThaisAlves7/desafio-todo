@@ -1,20 +1,15 @@
 import { Check, Trash } from '@phosphor-icons/react'
 
 import styles from './Item.module.css'
-import { ITasks } from '../../App'
-
-interface TaskStatus {
-  id: string
-  value: boolean
-}
+import { ITasks, TaskStatus } from '../../App'
 
 interface TasksProps {
   data: ITasks
   onRemoveTask: (id: string) => void
-  toggleTaskStatus?: ({ id, value }: TaskStatus) => void
+  onToggleTaskStatus: ({ id, value }: TaskStatus) => void
 }
 
-export function Item({ data, onRemoveTask, toggleTaskStatus }: TasksProps) {
+export function Item({ data, onRemoveTask, onToggleTaskStatus }: TasksProps) {
   const checkBoxCheckedClassName = data.isChecked
     ? styles['checkbox-checked']
     : styles['checkbox-unchecked']
@@ -26,10 +21,14 @@ export function Item({ data, onRemoveTask, toggleTaskStatus }: TasksProps) {
     onRemoveTask(data.id)
   }
 
+  const handleCheckedStatusTask = () => {
+    onToggleTaskStatus({ id: data.id, value: !data.isChecked })
+  }
+
   return (
     <div className={styles.container}>
       <div>
-        <label htmlFor="checkbox">
+        <label htmlFor="checkbox" onClick={handleCheckedStatusTask}>
           <input readOnly type="checkbox" checked={data.isChecked} />
           <span className={`${styles.checkbox} ${checkBoxCheckedClassName}`}>
             <Check size={12} />

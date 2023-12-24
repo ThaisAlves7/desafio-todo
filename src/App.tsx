@@ -18,6 +18,11 @@ export interface ITasks {
   isChecked: boolean
 }
 
+export interface TaskStatus {
+  id: string
+  value: boolean
+}
+
 export function App() {
   const [tasks, setTasks] = useState([
     {
@@ -51,12 +56,24 @@ export function App() {
     setInputText('')
   }
 
-  const handleDeleteTask = (taskToDelete: number) => {
+  const handleDeleteTask = (taskToDelete: string) => {
     const taskDelete = tasks.filter((task) => {
       return task.id !== taskToDelete
     })
 
     setTasks(taskDelete)
+  }
+
+  const handleCheckedStatusTask = ({ id, value }: TaskStatus) => {
+    const updateCheckedStatus = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, isChecked: value }
+      }
+
+      return { ...task }
+    })
+
+    setTasks(updateCheckedStatus)
   }
 
   return (
@@ -87,12 +104,13 @@ export function App() {
                     key={task.id}
                     data={task}
                     onRemoveTask={handleDeleteTask}
+                    onToggleTaskStatus={handleCheckedStatusTask}
                   />
                 )
               })}
             </div>
           ) : (
-            <Empty></Empty>
+            <Empty />
           )}
         </div>
       </section>
