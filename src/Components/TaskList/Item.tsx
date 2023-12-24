@@ -1,6 +1,7 @@
 import { Check, Trash } from '@phosphor-icons/react'
 
 import styles from './Item.module.css'
+
 import { ITasks, TaskStatus } from '../../App'
 
 interface TasksProps {

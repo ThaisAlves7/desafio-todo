@@ -76,6 +76,14 @@ export function App() {
     setTasks(updateCheckedStatus)
   }
 
+  const checkedTaskCounter = tasks.reduce((totalChecked, task) => {
+    if (task.isChecked) {
+      return totalChecked + 1
+    }
+
+    return totalChecked
+  }, 0)
+
   return (
     <main>
       <Header />
@@ -94,7 +102,10 @@ export function App() {
         </div>
 
         <div className={styles.tasksList}>
-          <ListHeader />
+          <ListHeader
+            taskCounter={tasks.length}
+            checkedTasksCounter={checkedTaskCounter}
+          />
 
           {tasks.length !== 0 ? (
             <div>
