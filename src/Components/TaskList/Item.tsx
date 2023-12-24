@@ -10,11 +10,15 @@ interface TaskStatus {
 
 interface TasksProps {
   data: ITasks
-  removeTask?: (id: number) => void
+  onRemoveTask: (id: number) => void
   toggleTaskStatus?: ({ id, value }: TaskStatus) => void
 }
 
-export function Item({ data, removeTask, toggleTaskStatus }: TasksProps) {
+export function Item({ data, onRemoveTask, toggleTaskStatus }: TasksProps) {
+  const handleDeleteTask = () => {
+    onRemoveTask(data.id)
+  }
+
   return (
     <div className={styles.container}>
       <div>
@@ -30,7 +34,7 @@ export function Item({ data, removeTask, toggleTaskStatus }: TasksProps) {
         </label>
       </div>
 
-      <button>
+      <button onClick={handleDeleteTask}>
         <Trash size={16} color="#808080" />
       </button>
     </div>
