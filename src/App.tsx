@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import './global.css'
 import styles from './App.module.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { Item } from './Components/TaskList/Item'
 import { Empty } from './Components/TaskList/Empty'
@@ -11,6 +12,7 @@ import { Input } from './Components/Input'
 import { Header } from './Components/Header'
 import { Button } from './Components/Button'
 import { ListHeader } from './Components/TaskList/ListHeader'
+import { ToastContainer, toast } from 'react-toastify'
 
 export interface ITasks {
   id: string
@@ -24,28 +26,13 @@ export interface TaskStatus {
 }
 
 export function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: uuidv4(),
-      task: 'Terminar o desafio',
-      isChecked: true,
-    },
-    {
-      id: uuidv4(),
-      task: 'Estudar TypeScript',
-      isChecked: false,
-    },
-    {
-      id: uuidv4(),
-      task: 'Estudar TypeScript',
-      isChecked: false,
-    },
-  ])
+  const [tasks, setTasks] = useState<ITasks[]>([])
   const [inputText, setInputText] = useState('')
 
-  const handleCreateNewTask = () => {
-    if (!inputText) return
+  const notifyError = () => toast.error('Esse Campo é obrigatório')
+  const notifyDelete = (msg: string) => toast.info(msg)
 
+  const handleCreateNewTask = () => {
     const newTask: ITasks = {
       id: uuidv4(),
       task: inputText,
@@ -57,11 +44,16 @@ export function App() {
   }
 
   const handleDeleteTask = (taskToDelete: string) => {
-    const taskDelete = tasks.filter((task) => {
-      return task.id !== taskToDelete
-    })
+    const isDelete = confirm('Você deseja deletar a task?')
 
-    setTasks(taskDelete)
+    if (isDelete) {
+      const taskDelete = tasks.filter((task) => {
+        return task.id !== taskToDelete
+      })
+
+      setTasks(taskDelete)
+      notifyDelete('Task deletada')
+    }
   }
 
   const handleCheckedStatusTask = ({ id, value }: TaskStatus) => {
@@ -93,12 +85,14 @@ export function App() {
           <Input
             onChange={(e) => setInputText(e.target.value)}
             value={inputText}
+            required
           />
 
-          <Button onClick={handleCreateNewTask}>
+          <Button onClick={inputText ? handleCreateNewTask : notifyError}>
             Criar
             <PlusCircle size={16} color="#f2f2f2" weight="bold" />
           </Button>
+          <ToastContainer />
         </div>
 
         <div className={styles.tasksList}>
