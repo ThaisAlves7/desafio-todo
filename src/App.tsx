@@ -6,6 +6,7 @@ import { PlusCircle } from "phosphor-react";
 import { Header } from "./Components/Header";
 import { Input } from "./Components/Input";
 import { Button } from "./Components/Button";
+import { ListHeader } from "./Components/TaskList/ListHeader";
 
 export function App() {
   return (
@@ -20,6 +21,10 @@ export function App() {
             Criar
             <PlusCircle size={16} color="#f2f2f2" weight="bold" />
           </Button>
+        </div>
+
+        <div className={styles.tasksList}>
+          <ListHeader />
         </div>
       </section>
     </main>
