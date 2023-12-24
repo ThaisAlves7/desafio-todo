@@ -8,6 +8,7 @@ import { Input } from "./Components/Input";
 import { Button } from "./Components/Button";
 import { ListHeader } from "./Components/TaskList/ListHeader";
 import { Empty } from "./Components/TaskList/Empty";
+import { Item } from "./Components/TaskList/Item";
 
 export function App() {
   const teste = true;
@@ -29,7 +30,13 @@ export function App() {
         <div className={styles.tasksList}>
           <ListHeader />
 
-          {teste ? <Empty></Empty> : <h1>Contém itens</h1>}
+          {teste ? (
+            <div>
+              <Item />
+            </div>
+          ) : (
+            <Empty></Empty>
+          )}
         </div>
       </section>
     </main>

@@ -1,6 +1,7 @@
 .container {
   padding: 4rem 1rem;
 
+  margin-top: 1rem;
   border-top: 1px solid var(--gray-400);
   border-radius: 8px;
 
