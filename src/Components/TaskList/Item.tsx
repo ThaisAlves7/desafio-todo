@@ -1,6 +1,6 @@
-import { Check, Trash } from "phosphor-react";
+import { Check, Trash } from '@phosphor-icons/react'
 
-import styles from "./Item.module.css";
+import styles from './Item.module.css'
 
 export function Item() {
   return (
@@ -12,7 +12,7 @@ export function Item() {
             <Check size={12} />
           </span>
 
-          <p className={`${styles.paragraph} ${styles["paragraph-checked"]}`}>
+          <p className={`${styles.paragraph} ${styles['paragraph-checked']}`}>
             Comprar fardo Coca-Cola
           </p>
         </label>
@@ -22,5 +22,5 @@ export function Item() {
         <Trash size={16} color="#808080" />
       </button>
     </div>
-  );
+  )
 }

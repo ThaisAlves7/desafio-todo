@@ -1,17 +1,17 @@
-import "./global.css";
-import styles from "./App.module.css";
+import './global.css'
+import styles from './App.module.css'
 
-import { PlusCircle } from "phosphor-react";
+import { PlusCircle } from '@phosphor-icons/react'
 
-import { Header } from "./Components/Header";
-import { Input } from "./Components/Input";
-import { Button } from "./Components/Button";
-import { ListHeader } from "./Components/TaskList/ListHeader";
-import { Empty } from "./Components/TaskList/Empty";
-import { Item } from "./Components/TaskList/Item";
+import { Header } from './Components/Header'
+import { Input } from './Components/Input'
+import { Button } from './Components/Button'
+import { ListHeader } from './Components/TaskList/ListHeader'
+import { Empty } from './Components/TaskList/Empty'
+import { Item } from './Components/TaskList/Item'
 
 export function App() {
-  const teste = true;
+  const teste = true
 
   return (
     <main>
@@ -40,5 +40,5 @@ export function App() {
         </div>
       </section>
     </main>
-  );
+  )
 }
